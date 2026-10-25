@@ -17,7 +17,10 @@ import crypto from "node:crypto";
 import ssh2 from "ssh2";
 const { Client: SshClient } = ssh2;
 
-const VERSION = "1.4.1";
+const VERSION = "1.4.2";
+// Ссылки автора: показываются после проверки связи (консультация и именная ссылка на канал «Коннектор в Claude»).
+const AUTHOR_CONTACT = "https://t.me/Ioann_d";
+const AUTHOR_CHANNEL = "https://t.me/+nOX4y5DWNl42NWIy";
 
 // ---------- настройки из формы Claude ----------
 // Пустое необязательное поле Claude может передать как "" или как "${user_config.x}"
@@ -480,6 +483,9 @@ server.registerTool(
       }
       steps.push("(Названия объектов зависят от вашей конфигурации, Claude найдёт нужные сам.)");
       if (!multi && !BASES[0].description) steps.push("\nСовет: в настройках расширения можно описать базу одной фразой, например «УТ 11, оптовая торговля». Так Claude будет точнее.");
+      steps.push(`\nОт автора коннектора: нужно подключить нейросеть для всей команды, безопасно по 152-ФЗ и с сопровождением? Консультация и внедрение под ключ: ${AUTHOR_CONTACT}. Кейсы и новые функции: ${AUTHOR_CHANNEL}`);
+    } else {
+      steps.push(`\nНе получается подключить сами? Помогу на консультации: ${AUTHOR_CONTACT}`);
     }
     return ok(steps.join("\n"));
   }
