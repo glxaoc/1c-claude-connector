@@ -102,14 +102,14 @@ await withClient({ODATA_URL_3:"http://127.0.0.1:8766/ERP/odata/standard.odata/",
   const r = await call(c,"check_connection"); check("3-я база без названия получает имя «База 3»", r.text.includes("База «База 3»") && r.text.includes("подключено баз: 2 из 2"), r.text);
 });
 await withClient({}, async c => {
-  let r = await call(c,"query",{object:"Catalog_Много",select:"Description",top:2000}); let j = JSON.parse(r.text);
-  check("top 2000: читается порциями и без пропусков", j.rows === 2000 && j.data[0].Description === "Товар 0" && j.data[1999].Description === "Товар 1999" && j.note?.includes("skip=2000"), r.text.slice(0,200));
+  let r = await call(c,"query",{object:"Catalog_Много",select:"Description",top:1000}); let j = JSON.parse(r.text);
+  check("top 1000: читается целиком и без пропусков", j.rows === 1000 && j.data[0].Description === "Товар 0" && j.data[999].Description === "Товар 999" && j.note?.includes("skip=1000") && !j.limit, r.text.slice(0,200));
   r = await call(c,"query",{object:"Catalog_Много",top:5000}); j = JSON.parse(r.text);
-  check("top 5000 при 2300 записях: вернулось всё, без «есть ещё»", j.rows === 2300 && !j.note && j.data[2299].Description === "Товар 2299", r.text.slice(0,200));
-  r = await call(c,"query",{object:"Catalog_Много",top:1500,skip:2000}); j = JSON.parse(r.text);
-  check("skip + top: конец списка", j.rows === 300 && j.data[0].Description === "Товар 2000", r.text.slice(0,200));
+  check("top 5000: бесплатная версия отдаёт 1000 и говорит про автора", j.rows === 1000 && j.limit?.includes("1000") && j.limit?.includes("t.me/Ioann_d"), r.text.slice(0,200));
+  r = await call(c,"query",{object:"Catalog_Много",top:1000,skip:2000}); j = JSON.parse(r.text);
+  check("skip + top: конец списка", j.rows === 300 && j.data[0].Description === "Товар 2000" && !j.limit, r.text.slice(0,200));
   r = await call(c,"query",{object:"Catalog_Много",top:10}); check("ответ компактный (без отступов)", !r.text.includes("\n "), r.text.slice(0,120));
-  const init = c.getInstructions?.() || ""; check("инструкции: top до 5000 и итоги через Turnovers", init.includes("5000") && init.includes("Turnovers"), init.slice(0,80));
+  const init = c.getInstructions?.() || ""; check("инструкции: top до 1000, итоги через Turnovers, границы бесплатной версии", init.includes("1000") && init.includes("Turnovers") && init.includes("Чего нет в бесплатной версии") && init.includes("t.me/Ioann_d"), init.slice(0,80));
 });
 await withClient(SSHOK, async c => { const r = await call(c,"check_connection"); check("SSH: всё верно", r.text.includes("SSH установлено") && r.text.includes("приняты"), r.text);
   const q = await call(c,"count",{object:"Document_РеализацияТоваровУслуг"}); check("SSH: запрос данных через туннель", q.text.includes("1234"), q.text); });
