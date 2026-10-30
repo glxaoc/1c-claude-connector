@@ -41,6 +41,7 @@ http.createServer((req,res)=>{
     const all = Array.from({length:2300},(_, i)=>({Ref_Key:`k${i}`,Description:`Товар ${i}`}));
     return send(res,200,JSON.stringify({value:all.slice(skip,skip+top)}));
   }
+  if (p==="Catalog_Контрагенты") return send(res,200,JSON.stringify({value:[{Description:"ООО Тест","Телефон":"+7 900 111-22-33"}]}));
   if (p==="Document_РеализацияТоваровУслуг/$count") return send(res,200,"﻿1234","text/plain");
   if (p==="Document_РеализацияТоваровУслуг") {
     const top=+u.searchParams.get("$top")||500; return send(res,200,"﻿"+JSON.stringify({"odata.metadata":"x",value:big.slice(0,top).map((r,i)=>i===0&&u.searchParams.get("$expand")?{...r,_expand:u.searchParams.get("$expand"),_select:u.searchParams.get("$select")}:r)}));

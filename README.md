@@ -1,13 +1,31 @@
-# 1С-коннектор для Claude
+<p align="center">
+  <a href="https://github.com/glxaoc/1c-claude-connector/releases/latest"><img src="docs/img/banner.png" alt="1С-коннектор для Claude: спросите Claude о вашей 1С обычными словами и получите ответ из живой базы" width="100%"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/glxaoc/1c-claude-connector/releases/latest"><img alt="Версия" src="https://img.shields.io/github/v/release/glxaoc/1c-claude-connector?label=%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F&color=D7A832"></a>
+  <a href="LICENSE"><img alt="Лицензия MIT" src="https://img.shields.io/badge/%D0%BB%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F-MIT-101012"></a>
+  <img alt="Windows и macOS" src="https://img.shields.io/badge/Windows%20%D0%B8%20macOS-101012">
+  <img alt="Только чтение" src="https://img.shields.io/badge/1%D0%A1-%D1%82%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D1%87%D1%82%D0%B5%D0%BD%D0%B8%D0%B5-3F8660">
+</p>
+
+<p align="center">
+  <a href="https://github.com/glxaoc/1c-claude-connector/releases/latest/download/1c-connector.mcpb"><img alt="Скачать 1c-connector.mcpb" src="https://img.shields.io/badge/%D0%A1%D0%BA%D0%B0%D1%87%D0%B0%D1%82%D1%8C-1c--connector.mcpb-101012?style=for-the-badge&logo=anthropic&logoColor=D7A832"></a>
+  <a href="https://t.me/Ioann_d?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D0%B0%D1%88%D1%91%D0%BB%20%D0%BA%D0%BE%D0%BD%D0%BD%D0%B5%D0%BA%D1%82%D0%BE%D1%80%201%D0%A1%20%D0%B4%D0%BB%D1%8F%20Claude%20%D0%BD%D0%B0%20GitHub%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D1%8C%20%D1%81%D0%B2%D0%BE%D1%8E%201%D0%A1.%20%5Bgh-claude-hero%5D"><img alt="Написать автору в Telegram" src="https://img.shields.io/badge/%D0%9D%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C_%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D1%83-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white"></a>
+</p>
+
+<p align="center">
+  <b><a href="#как-это-выглядит">Как это выглядит</a></b> ·
+  <b><a href="#как-это-работает">Как работает</a></b> ·
+  <b><a href="#установка-за-4-шага">Установка за 4 шага</a></b> ·
+  <b><a href="#что-можно-спросить">Что можно спросить</a></b> ·
+  <b><a href="#бесплатно-и-под-ключ">Бесплатно и под ключ</a></b> ·
+  <b><a href="#частые-проблемы">Частые проблемы</a></b>
+</p>
 
 **Спросите Claude о вашей 1С обычными словами и получите ответ из живой базы.** Продажи, остатки, номенклатура, контрагенты: без выгрузок в Excel и без программиста на каждый вопрос.
 
-Коннектор работает только на чтение: он не может ничего изменить или удалить в 1С.
-
-[![Релиз](https://img.shields.io/github/v/release/glxaoc/1c-claude-connector?label=%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F&color=D7A832)](https://github.com/glxaoc/1c-claude-connector/releases/latest)
-[![Лицензия](https://img.shields.io/badge/%D0%BB%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F-MIT-101012)](LICENSE)
-
-### [Скачать 1c-connector.mcpb](https://github.com/glxaoc/1c-claude-connector/releases/latest/download/1c-connector.mcpb)
+Коннектор работает только на чтение: он не может ничего изменить или удалить в 1С. Для Claude Desktop на Windows и macOS. Установка двойным кликом по файлу `.mcpb`.
 
 ## Как это выглядит
 
@@ -34,21 +52,47 @@
 - Работает с несколькими базами сразу (до трёх), например «Бухгалтерия» и «ERP».
 - Проверяет связь пошагово и простым языком объясняет, что не так и что исправить.
 
+## Как это работает
+
+<img src="docs/img/how-it-works.png" alt="Схема: Claude Desktop на вашем компьютере, коннектор на вашем компьютере, при необходимости сервер-посредник по SSH, ваша 1С по OData" width="100%">
+
+- Коннектор запускается **на вашем компьютере**, отдельного сервера у него нет и ничего не отправляется автору.
+- В 1С уходят только запросы на чтение, пользователь 1С должен быть только на чтение.
+- Если 1С пускает только IP из белого списка, коннектор ходит в неё через ваш сервер по защищённому SSH-туннелю.
+- Всё, что вы запросили, попадает в диалог с Claude (сервис Anthropic). Помните об этом, если в базе есть персональные данные.
+
+## Установка за 4 шага
+
+<img src="docs/img/steps.png" alt="Четыре шага: подготовьте 1С, установите расширение, заполните форму, включите и спросите" width="100%">
+
+## Бесплатно и под ключ
+
+<a href="https://t.me/Ioann_d?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A3%D0%B2%D0%B8%D0%B4%D0%B5%D0%BB%20%D0%BD%D0%B0%20GitHub%20%D1%83%D1%81%D0%BB%D1%83%D0%B3%D0%B8%20%C2%AB%D0%BF%D0%BE%D0%B4%20%D0%BA%D0%BB%D1%8E%D1%87%C2%BB%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D0%B2%D0%BD%D0%B5%D0%B4%D1%80%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%98%D0%98%20%D0%B2%20%D0%BC%D0%BE%D0%B5%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%B8.%20%5Bgh-claude-offer-img%5D"><img src="docs/img/free-vs-paid.png" alt="Слева бесплатные возможности этого репозитория, справа услуги автора под ключ за отдельную плату" width="100%"></a>
+
+Коннектор бесплатный, открытый (MIT) и ставится самостоятельно. Что в нём есть и что автор делает отдельно:
+
+| Бесплатная версия (этот репозиторий) | Под ключ у автора |
+| --- | --- |
+| Чтение данных 1С по OData | Запись в 1С: создание заказов и документов с проверками |
+| До 1000 строк за запрос, длинные списки по частям | Выгрузки без ограничений, регулярные отчёты в Telegram |
+| Один пользователь, до трёх баз | Работа для команды: у каждого сотрудника свои права, журнал обращений |
+| Только данные 1С | CRM, реклама и сайт (Bitrix24, Twenty, Метрика, Директ) в одном чате с 1С |
+| Данные запроса попадают в диалог с ИИ-сервисом | Защищённый шлюз: персональные данные не уходят в нейросеть |
+| Самостоятельная настройка доступа | Настройка сервера-посредника, белого списка IP и https за вас |
+
+<p align="center">
+  <a href="https://t.me/Ioann_d?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9F%D0%B8%D1%88%D1%83%20%D0%B8%D0%B7%20%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F%201%D0%A1-%D0%BA%D0%BE%D0%BD%D0%BD%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%B0%20%D0%B4%D0%BB%D1%8F%20Claude%2C%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81.%20%5Bgh-claude-footer%5D"><img alt="Написать автору в Telegram" src="https://img.shields.io/badge/%D0%9D%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C_%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D1%83-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white"></a>
+  <a href="https://t.me/+3N-D00524gcyMWEy"><img alt="Кейсы и новости в Telegram-канале" src="https://img.shields.io/badge/%D0%9A%D0%B5%D0%B9%D1%81%D1%8B_%D0%B8_%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D0%B0%D0%BD%D0%B0%D0%BB-101012?style=for-the-badge&logo=telegram&logoColor=D7A832"></a>
+</p>
+
+Консультация: разберём ваш бизнес, какие данные подключить к нейросети, что это даст и какие у этого ограничения.
+
 ## Чего не делает
 
 - **Не записывает ничего в 1С.** Коннектор отправляет только запросы на чтение. Создать, изменить или удалить документ через него невозможно.
 - **Не обходит права доступа.** Claude видит только то, что открыто пользователю, под которым вы подключились.
-- **Работает только с Claude Desktop** (Windows и macOS). Для ChatGPT нужен другой путь: удалённый сервер с https.
 
-## Нужно под ключ?
-
-Коннектор бесплатный и ставится самостоятельно. Если нужно больше:
-
-- **Консультация.** Разберём ваш бизнес: какие данные подключить к нейросети, что это даст и как сделать безопасно по 152-ФЗ. Записаться: напишите в [Telegram](https://t.me/Ioann_d).
-- **Внедрение под ключ.** Защищённый шлюз к 1С для всей команды: персональные данные не уходят в нейросеть, у каждого сотрудника свой доступ, журнал обращений. Подключение, проверка на ваших данных, сопровождение.
-- **Кейсы и новые функции коннектора** выходят в [Telegram-канале](https://t.me/+3N-D00524gcyMWEy).
-
-## Быстрый старт
+## Подробно по шагам
 
 **Что понадобится:** Claude Desktop, база 1С с опубликованным OData и пользователь 1С с правами только на чтение.
 
@@ -99,7 +143,7 @@
 | Пароль сервера (SSH) | Его пароль. Если сервер пускает только по ключу, оставьте пустым |
 | Файл SSH-ключа | Приватный ключ, если вход по ключу |
 
-Если вход не удался, `check_connection` покажет, какие способы входа разрешает сервер (пароль, ключ или оба), и подскажет причину.
+Если вход не удался, проверка связи покажет, какие способы входа разрешает сервер (пароль, ключ или оба), и подскажет причину. Настроить сервер-посредник, белый список и https за вас может автор: [написать](https://t.me/Ioann_d?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A3%20%D0%BC%D0%B5%D0%BD%D1%8F%201%D0%A1%20%D0%B7%D0%B0%D0%BA%D1%80%D1%8B%D1%82%D0%B0%20%D0%B1%D0%B5%D0%BB%D1%8B%D0%BC%20%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%BE%D0%BC%20IP%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D1%81%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%BE%D0%BC-%D0%BF%D0%BE%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%BC.%20%5Bgh-claude-whitelist%5D).
 
 ### Рекомендуемая настройка сервера
 
@@ -145,6 +189,9 @@ sshd -t && systemctl reload ssh
 - Какие объекты 1С тебе доступны
 - Какие поля есть у документа «Реализация товаров и услуг»
 
+**Что ещё можно подключить**
+- Что ещё можно подключить к этому чату (коннектор покажет список и поможет составить сообщение автору)
+
 Названия объектов зависят от конфигурации. Claude находит нужные сам, ничего запоминать не нужно.
 
 ## Безопасность и данные
@@ -152,8 +199,9 @@ sshd -t && systemctl reload ssh
 - **Только чтение.** Коннектор использует исключительно GET-запросы. Дополнительно ограничьте права пользователя в самой 1С.
 - **Пароли не попадают в чат.** Их вы вводите в форме расширения, они хранятся в Windows Credential Manager или macOS Keychain.
 - **Шифрование.** Если OData опубликован по `http://`, логин и пароль 1С идут по сети открыто. Для постоянной работы попросите тех. специалиста настроить https.
-- **Данные попадают в диалог с Claude** и обрабатываются сервисом Anthropic. Если в базе есть персональные данные, оцените это с точки зрения 152-ФЗ. Начинайте с остатков, номенклатуры и сумм без персональных данных.
-- **Размер ответа.** За один запрос Claude получает не больше примерно 150 КБ текста, больше в диалог не помещается. Длинные списки он читает по частям, а для итогов использует подсчёт и обороты, а не выгрузку тысяч строк. Длинные списки коннектор читает из 1С порциями сам, а для итогов Claude использует подсчёт и обороты, а не выгрузку тысяч строк. Если нужна полная выгрузка, просите по частям (по периоду или по группе) или только нужные поля.
+- **Данные попадают в диалог с Claude** и обрабатываются сервисом Anthropic, серверы которого находятся за пределами вашей компании. Если в базе есть персональные данные физических лиц, у оператора есть обязанности по 152-ФЗ. Начинайте с остатков, номенклатуры и сумм без персональных данных. Коннектор предупреждает, когда в ответе есть поля вроде телефона или ФИО.
+- **Подсказки автора.** В ответах коннектора иногда есть пометка «Справка от автора»: когда задача выходит за пределы бесплатной версии или когда вы сами спросили, что ещё можно подключить. Они не меняют ответ, не чаще нескольких раз за запуск и подписаны. Коннектор ничего не отправляет автору сам: никакой статистики и проверок обновлений через интернет нет, сообщение автору уходит только если вы сами откроете ссылку.
+- **Размер ответа.** За один запрос приходит до 1000 строк и не больше примерно 150 КБ текста, больше в диалог не помещается. Длинные списки коннектор читает из 1С порциями сам, а для итогов Claude использует подсчёт и обороты, а не выгрузку тысяч строк. Если нужна полная выгрузка, просите по частям (по периоду или по группе) или только нужные поля.
 
 ## Частые проблемы
 
@@ -170,16 +218,18 @@ sshd -t && systemctl reload ssh
 | Самоподписанный сертификат https | Включите «Разрешить самоподписанный сертификат» |
 | В ответе коды вместо названий | Напишите Claude: «покажи названия вместо кодов» |
 
+Не помогло? Откройте [issue](https://github.com/glxaoc/1c-claude-connector/issues/new/choose) и приложите вывод проверки связи (в нём нет паролей).
+
 ## Совместимость
 
-Проверено на «Управлении торговлей 11» с Claude Desktop на Windows. Другие конфигурации (ERP, «Бухгалтерия», «Комплексная автоматизация», «ЗУП») должны работать, потому что коннектор не привязан к именам объектов и ищет их по базе, но на реальных установках они пока не тестировались. macOS поддерживается, на реальном Mac пока не проверялся. Если встретите проблему, [откройте issue](https://github.com/glxaoc/1c-claude-connector/issues).
+Проверено на «Управлении торговлей 11» с Claude Desktop на Windows. Другие конфигурации (ERP, «Бухгалтерия», «Комплексная автоматизация», «ЗУП») должны работать, потому что коннектор не привязан к именам объектов и ищет их по базе, но на реальных установках они пока не тестировались. macOS поддерживается, на реальном Mac пока не проверялся. Если встретите проблему, [откройте issue](https://github.com/glxaoc/1c-claude-connector/issues/new/choose).
 
 <details>
 <summary><b>Для разработчиков</b></summary>
 
 &nbsp;
 
-Локальный MCP-сервер на Node.js, упакованный в [MCPB](https://github.com/modelcontextprotocol/mcpb). Инструменты: `check_connection`, `list_objects`, `describe_object`, `query`, `count`.
+Локальный MCP-сервер на Node.js, упакованный в [MCPB](https://github.com/modelcontextprotocol/mcpb). Инструменты: `check_connection`, `list_objects`, `describe_object`, `query`, `count`, `what_else`, `contact_author`.
 
 ```bash
 npm install
@@ -189,14 +239,14 @@ npm run pack    # чистит нативные модули, валидируе
 
 Собирать пакет нужно только через `npm run pack`: он удаляет собранные под одну ОС нативные модули ssh2, чтобы расширение работало и на Windows, и на macOS. В `.mcpbignore` шаблоны указываются от корня (`/dist/`, `/tests/`), иначе из пакета выпадают одноимённые папки внутри `node_modules`.
 
-Перед новой версией: поднимите `VERSION` в `server/index.js` и `version` в `manifest.json`, `package.json`, `package-lock.json`, прогоните тесты, соберите и распакуйте `.mcpb` (`npx @anthropic-ai/mcpb unpack`), проверив, что внутри есть `node_modules/@modelcontextprotocol/sdk/dist/esm/server/mcp.js`.
+Перед новой версией: поднимите `VERSION` в `server/index.js` и `version` в `manifest.json`, `package.json`, `package-lock.json`, прогоните тесты, соберите и распакуйте `.mcpb` (`npx @anthropic-ai/mcpb unpack`), проверив, что внутри есть `node_modules/@modelcontextprotocol/sdk/dist/esm/server/mcp.js`. Файлы настроек и пароли в репозиторий не добавляйте: `settings.xml`, `.env`, `work/` в `.gitignore`.
 
 </details>
 
 ## English
 
-**1C Connector for Claude** is a Claude Desktop extension (MCPB) that lets Claude read data from 1C:Enterprise through its standard OData interface. Read-only (GET requests only). Works directly or through an SSH jump host for 1C installations restricted by an IP allowlist. Credentials are stored in the OS keychain. Download the latest `.mcpb` from [Releases](https://github.com/glxaoc/1c-claude-connector/releases/latest).
+**1C Connector for Claude** is a Claude Desktop extension (MCPB) that lets Claude read data from 1C:Enterprise through its standard OData interface. Read-only (GET requests only). Works directly or through an SSH jump host for 1C installations restricted by an IP allowlist. Credentials are stored in the OS keychain. Free and open source (MIT). Download the latest `.mcpb` from [Releases](https://github.com/glxaoc/1c-claude-connector/releases/latest). Custom integrations (writing to 1C, CRM, reports, team access) are available from the author.
 
 ## Автор и лицензия
 
-Иван Дробитько, внедрение нейросетей в бизнес. Консультация и внедрение под ключ: [написать в Telegram](https://t.me/Ioann_d). Кейсы и новости коннектора: [Telegram-канал](https://t.me/+3N-D00524gcyMWEy). Лицензия MIT.
+Иван Дробитько, внедрение нейросетей в бизнес. Консультация и внедрение под ключ: [написать в Telegram](https://t.me/Ioann_d?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9F%D0%B8%D1%88%D1%83%20%D0%B8%D0%B7%20README%201%D0%A1-%D0%BA%D0%BE%D0%BD%D0%BD%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%B0%20%D0%B4%D0%BB%D1%8F%20Claude%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E.%20%5Bgh-claude-readme-end%5D). Кейсы и новости коннектора: [Telegram-канал](https://t.me/+3N-D00524gcyMWEy). Лицензия MIT.

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
+<style>
+:root { --cream:#EBE9E4; --surface:#F4F2ED; --ink:#101012; --border:#D7CBB5; --gold:#D7A832; --dim:#5E5C5A; }
+* { box-sizing:border-box; margin:0; }
+body { width:1600px; height:610px; background:var(--cream); color:var(--ink); font-family:'Onest',system-ui,sans-serif; padding:44px 64px; display:flex; flex-direction:column; gap:30px; overflow:hidden; }
+.title { font-size:40px; font-weight:800; letter-spacing:-0.01em; }
+.flow { display:flex; align-items:stretch; gap:0; }
+.node { flex:1; background:var(--surface); border:2px solid var(--ink); border-radius:24px; padding:22px 24px; display:flex; flex-direction:column; gap:8px; }
+.node.dark { background:var(--ink); color:var(--cream); }
+.node.opt { border-style:dashed; border-color:var(--dim); }
+.node h3 { font-size:30px; font-weight:700; }
+.node p { font-size:21px; line-height:1.35; color:var(--dim); }
+.node.dark p { color:#BDB9B2; }
+.badge { align-self:flex-start; font-size:17px; font-weight:700; background:var(--gold); color:var(--ink); padding:3px 12px; border-radius:999px; }
+.arrow { width:92px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--dim); font-size:17px; font-weight:600; text-align:center; }
+.arrow svg { width:70px; height:24px; }
+.facts { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+.fact { border-top:3px solid var(--ink); padding-top:12px; font-size:21px; line-height:1.35; }
+.fact b { display:block; font-size:22px; margin-bottom:3px; }
+</style></head>
+<body>
+  <div class="title">Как это работает</div>
+  <div class="flow">
+    <div class="node dark"><span class="badge">на вашем компьютере</span><h3>Claude</h3><p>Claude Desktop. Вы пишете вопрос обычными словами.</p></div>
+    <div class="arrow"><svg viewBox="0 0 70 24"><path d="M2 12h60M52 3l10 9-10 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>вопрос</div>
+    <div class="node dark"><span class="badge">на вашем компьютере</span><h3>Коннектор</h3><p>Запускается локально. Отправляет в 1С только запросы на чтение.</p></div>
+    <div class="arrow"><svg viewBox="0 0 70 24"><path d="M2 12h60M52 3l10 9-10 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>OData</div>
+    <div class="node opt"><h3>Сервер-посредник</h3><p>Нужен только если 1С пускает лишь IP из белого списка. Связь по защищённому SSH-туннелю.</p></div>
+    <div class="arrow"><svg viewBox="0 0 70 24"><path d="M2 12h60M52 3l10 9-10 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>запрос</div>
+    <div class="node"><h3>Ваша 1С</h3><p>Опубликованный OData и пользователь только на чтение. Ничего не меняется.</p></div>
+  </div>
+  <div class="facts">
+    <div class="fact"><b>Пароли у вас</b>Лежат в защищённом хранилище Windows или macOS и не попадают в чат.</div>
+    <div class="fact"><b>Только чтение</b>Создать или изменить документ через коннектор нельзя.</div>
+    <div class="fact"><b>Без сервера автора</b>Коннектор ничего не отправляет автору, статистики нет.</div>
+    <div class="fact"><b>Ответы идут в Claude</b>Всё, что вы запросили, попадает в диалог с сервисом Anthropic.</div>
+  </div>
+</body></html>

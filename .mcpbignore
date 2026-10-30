@@ -6,3 +6,5 @@
 /*.log
 /*.mcpb
 /package-lock.json
+/.github/
+/docs/

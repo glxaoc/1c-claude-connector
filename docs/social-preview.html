@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
+<style>
+:root { --cream:#EBE9E4; --surface:#F4F2ED; --ink:#101012; --border:#D7CBB5; --gold:#D7A832; --dim:#5E5C5A; }
+* { box-sizing:border-box; margin:0; }
+body { width:1280px; height:640px; background:var(--cream); color:var(--ink); font-family:'Onest',system-ui,sans-serif; display:flex; overflow:hidden; }
+.left { flex:1; padding:64px 20px 56px 72px; display:flex; flex-direction:column; justify-content:space-between; }
+.tag { font-size:20px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); }
+h1 { font-size:76px; line-height:1.04; font-weight:800; letter-spacing:-0.02em; margin-top:22px; }
+h1 .hl { background:var(--gold); padding:0 .12em; border-radius:8px; }
+.sub { font-size:30px; line-height:1.35; margin-top:24px; max-width:560px; color:var(--ink); }
+.chips { display:flex; gap:12px; flex-wrap:wrap; }
+.chip { font-size:21px; font-weight:600; border:2px solid var(--ink); border-radius:999px; padding:6px 18px; }
+.right { width:520px; padding:64px 64px 56px 0; display:flex; align-items:center; }
+.card { width:100%; background:var(--ink); color:var(--cream); border-radius:28px; padding:28px; display:flex; flex-direction:column; gap:14px; box-shadow:0 18px 40px rgba(16,16,18,.18); }
+.q { align-self:flex-end; background:#2A2A2E; border-radius:18px 18px 4px 18px; padding:12px 16px; font-size:20px; max-width:90%; }
+.a { background:#1C1C1F; border-radius:18px 18px 18px 4px; padding:14px 16px; font-size:19px; }
+.row { display:flex; justify-content:space-between; gap:12px; padding:7px 0; border-bottom:1px solid #34343A; font-variant-numeric:tabular-nums; }
+.row:last-child { border-bottom:0; }
+.row b { color:var(--gold); font-weight:700; }
+.ro { font-size:18px; color:#BDB9B2; }
+</style></head>
+<body>
+  <div class="left">
+    <div>
+      <div class="tag">Открытый · только чтение</div>
+      <h1>1<span class="hl">С</span>-коннектор для Claude</h1>
+      <div class="sub">Спросите Claude о вашей 1С обычными словами и получите ответ из живой базы</div>
+    </div>
+    <div class="chips"><span class="chip">Claude Desktop</span><span class="chip">Windows и macOS</span><span class="chip">OData</span><span class="chip">MIT</span></div>
+  </div>
+  <div class="right">
+    <div class="card">
+      <div class="q">Покажи 5 последних реализаций</div>
+      <div class="a">
+        <div class="row"><span>000-007122 · ООО «Ромашка»</span><b>4 660</b></div>
+        <div class="row"><span>000-007121 · ИП Сидоров</span><b>4 060</b></div>
+        <div class="row"><span>000-006991 · ООО «Ромашка»</span><b>2 100</b></div>
+        <div class="row"><span>000-007120 · ООО «Заря»</span><b>2 650</b></div>
+      </div>
+      <div class="ro">Данные вымышлены. Коннектор ничего не меняет в 1С.</div>
+    </div>
+  </div>
+</body></html>
