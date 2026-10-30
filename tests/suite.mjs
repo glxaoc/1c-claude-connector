@@ -124,7 +124,7 @@ await withClient({}, async c => {
   r = await call(c,"query",{object:"Catalog_Контрагенты",select:"Description,Телефон",top:2});
   check("подсказка про персональные данные показывается один раз", !r.text.includes('"info"'), r.text.slice(0,160));
   r = await call(c,"check_connection");
-  check("проверка связи: указатель на витрину «что ещё можно подключить»", r.text.includes("что ещё можно подключить"), r.text.slice(-400));
+  check("проверка связи: указатель на витрину «что ещё можно подключить»", r.text.includes("какие услуги предлагает автор"), r.text.slice(-400));
 });
 await withClient(SSHOK, async c => { const r = await call(c,"check_connection"); check("SSH: всё верно", r.text.includes("SSH установлено") && r.text.includes("приняты"), r.text);
   const q = await call(c,"count",{object:"Document_РеализацияТоваровУслуг"}); check("SSH: запрос данных через туннель", q.text.includes("1234"), q.text); });
