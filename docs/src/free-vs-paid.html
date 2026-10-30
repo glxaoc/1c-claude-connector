@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
+<style>
+:root { --cream:#EBE9E4; --surface:#F4F2ED; --ink:#101012; --border:#D7CBB5; --gold:#D7A832; --dim:#5E5C5A; }
+* { box-sizing:border-box; margin:0; }
+body { width:1600px; height:690px; background:var(--cream); color:var(--ink); font-family:'Onest',system-ui,sans-serif; padding:44px 64px; display:flex; gap:28px; overflow:hidden; }
+.col { flex:1; border-radius:28px; padding:34px 38px; display:flex; flex-direction:column; gap:14px; }
+.free { background:var(--surface); border:2px solid var(--ink); }
+.paid { background:var(--ink); color:var(--cream); }
+.head { display:flex; align-items:baseline; gap:14px; }
+h2 { font-size:38px; font-weight:800; letter-spacing:-0.01em; }
+.tagline { font-size:21px; color:var(--dim); font-weight:500; }
+.paid .tagline { color:#BDB9B2; }
+ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:13px; margin-top:6px; }
+li { display:flex; gap:14px; font-size:25px; line-height:1.3; align-items:flex-start; }
+li svg { flex:none; width:30px; height:30px; margin-top:2px; fill:none; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+.free li svg { stroke:#3F8660; }
+.paid li svg { stroke:var(--gold); }
+.cta { margin-top:auto; font-size:24px; font-weight:600; }
+.paid .cta { background:var(--gold); color:var(--ink); border-radius:16px; padding:14px 20px; font-size:25px; }
+</style></head>
+<body>
+  <div class="col free">
+    <div class="head"><h2>Бесплатно</h2><span class="tagline">этот репозиторий, MIT</span></div>
+    <ul>
+      <li><svg viewBox="0 0 30 30"><path d="M6 16l6 6 12-13"/></svg>Чтение данных 1С по OData</li>
+      <li><svg viewBox="0 0 30 30"><path d="M6 16l6 6 12-13"/></svg>Названия вместо кодов, остатки и обороты</li>
+      <li><svg viewBox="0 0 30 30"><path d="M6 16l6 6 12-13"/></svg>До 1000 строк за запрос, длинные списки по частям</li>
+      <li><svg viewBox="0 0 30 30"><path d="M6 16l6 6 12-13"/></svg>Доступ напрямую или через сервер-посредник</li>
+      <li><svg viewBox="0 0 30 30"><path d="M6 16l6 6 12-13"/></svg>Один пользователь, до трёх баз</li>
+    </ul>
+    <div class="cta">Установка двойным кликом, без программиста</div>
+  </div>
+  <div class="col paid">
+    <div class="head"><h2>Под ключ у автора</h2><span class="tagline">за отдельную плату</span></div>
+    <ul>
+      <li><svg viewBox="0 0 30 30"><path d="M15 6v18M6 15h18"/></svg>Запись в 1С: заказы и документы с проверками</li>
+      <li><svg viewBox="0 0 30 30"><path d="M15 6v18M6 15h18"/></svg>Регулярные отчёты в Telegram, выгрузки без лимита</li>
+      <li><svg viewBox="0 0 30 30"><path d="M15 6v18M6 15h18"/></svg>CRM, реклама и сайт в одном чате с 1С</li>
+      <li><svg viewBox="0 0 30 30"><path d="M15 6v18M6 15h18"/></svg>Команда: у каждого сотрудника свои права</li>
+      <li><svg viewBox="0 0 30 30"><path d="M15 6v18M6 15h18"/></svg>Защита персональных данных, больше баз</li>
+      <li><svg viewBox="0 0 30 30"><path d="M15 6v18M6 15h18"/></svg>Сервер-посредник, белый список и https за вас</li>
+    </ul>
+    <div class="cta">Написать автору в Telegram</div>
+  </div>
+</body></html>
