@@ -1,0 +1,51 @@
+name: Не подключается или ошибка
+description: Коннектор не устанавливается, не видит 1С или отвечает с ошибкой
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Заявка публичная, её увидят все. **Не вставляйте сюда пароли, адреса вашей 1С и данные клиентов.**
+        Если нужна помощь с настройкой или вы хотите заказать доработку, напишите автору в Telegram: ссылка на предыдущем экране.
+  - type: dropdown
+    id: edition
+    attributes:
+      label: Система
+      options:
+        - Windows
+        - macOS
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Версия коннектора
+      description: Строка «1С-коннектор X.Y.Z» в начале ответа проверки связи
+      placeholder: "1.6.0"
+  - type: dropdown
+    id: access
+    attributes:
+      label: Как подключаетесь к 1С
+      options:
+        - Напрямую
+        - Через сервер-посредник по SSH
+        - Не уверен
+  - type: input
+    id: config
+    attributes:
+      label: Конфигурация 1С
+      placeholder: "Например: УТ 11, Бухгалтерия 3.0, ERP"
+  - type: textarea
+    id: check
+    attributes:
+      label: Ответ на «Проверь связь с 1С»
+      description: Скопируйте текст целиком. В нём нет паролей, но замените IP-адреса и названия на «xxx», если они вас смущают.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: Что вы делали и что пошло не так
+    validations:
+      required: true

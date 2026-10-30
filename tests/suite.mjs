@@ -109,7 +109,22 @@ await withClient({}, async c => {
   r = await call(c,"query",{object:"Catalog_Много",top:1000,skip:2000}); j = JSON.parse(r.text);
   check("skip + top: конец списка", j.rows === 300 && j.data[0].Description === "Товар 2000" && !j.limit, r.text.slice(0,200));
   r = await call(c,"query",{object:"Catalog_Много",top:10}); check("ответ компактный (без отступов)", !r.text.includes("\n "), r.text.slice(0,120));
-  const init = c.getInstructions?.() || ""; check("инструкции: top до 1000, итоги через Turnovers, границы бесплатной версии", init.includes("1000") && init.includes("Turnovers") && init.includes("Чего нет в бесплатной версии") && init.includes("t.me/Ioann_d"), init.slice(0,80));
+  const init = c.getInstructions?.() || ""; check("инструкции: top до 1000, итоги через Turnovers, границы бесплатной версии", init.includes("1000") && init.includes("Turnovers") && init.includes("Реклама услуг автора") && init.includes("what_else") && init.includes("contact_author"), init.slice(0,80));
+});
+await withClient({}, async c => {
+  let r = await call(c,"what_else");
+  check("витрина: перечень услуг, пометка «от автора», именная ссылка канала Claude", r.text.includes("Справка от автора") && r.text.includes("за отдельную плату") && r.text.includes("CRM") && r.text.includes("+nOX4y5DWNl42NWIy"), r.text);
+  r = await call(c,"contact_author",{task:"Подключить CRM и отчёты в Telegram"});
+  check("обращение к автору: есть задача и ссылка с подставленным текстом", r.text.includes("Подключить CRM") && r.text.includes("t.me/Ioann_d?text="), r.text.slice(0,200));
+  check("обращение к автору: нет пароля, логина и адреса 1С", !r.text.includes("p@ss") && !r.text.includes("odata.user") && !r.text.includes("127.0.0.1") && !decodeURIComponent(r.text).includes("p@ss"), r.text.slice(0,200));
+  r = await call(c,"query",{object:"Document_РеализацияТоваровУслуг",select:"Number",top:2});
+  check("подсказка про персональные данные не появляется без таких полей", !r.text.includes('"info"'), r.text.slice(0,160));
+  r = await call(c,"query",{object:"Catalog_Контрагенты",select:"Description,Телефон",top:2});
+  check("подсказка про персональные данные: факт и 152-ФЗ, подпись автора", r.text.includes('"info"') && r.text.includes("Справка от автора") && r.text.includes("152-ФЗ") && !r.text.includes("безопасно"), r.text.slice(0,260));
+  r = await call(c,"query",{object:"Catalog_Контрагенты",select:"Description,Телефон",top:2});
+  check("подсказка про персональные данные показывается один раз", !r.text.includes('"info"'), r.text.slice(0,160));
+  r = await call(c,"check_connection");
+  check("проверка связи: указатель на витрину «что ещё можно подключить»", r.text.includes("что ещё можно подключить"), r.text.slice(-400));
 });
 await withClient(SSHOK, async c => { const r = await call(c,"check_connection"); check("SSH: всё верно", r.text.includes("SSH установлено") && r.text.includes("приняты"), r.text);
   const q = await call(c,"count",{object:"Document_РеализацияТоваровУслуг"}); check("SSH: запрос данных через туннель", q.text.includes("1234"), q.text); });
