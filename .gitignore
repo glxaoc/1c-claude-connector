@@ -5,7 +5,8 @@ tests/hostkey*
 tests/k1
 tests/k2
 HANDOFF.md
-.claude/
+/.claude/*
+!/.claude/skills/
 
 # защита от случайной публикации данных (настройки, пароли, рабочие выгрузки)
 settings.xml
