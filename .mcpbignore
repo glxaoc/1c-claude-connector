@@ -8,3 +8,11 @@
 /package-lock.json
 /.github/
 /docs/
+/.claude/
+/REVIEW.md
+.env
+.env.*
+settings.xml
+*.bak-1c
+/work/
+/codex/
