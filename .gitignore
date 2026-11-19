@@ -7,6 +7,8 @@ tests/k2
 HANDOFF.md
 /.claude/*
 !/.claude/skills/
+/.claude/skills/*
+!/.claude/skills/verify-1c-connector/
 
 # защита от случайной публикации данных (настройки, пароли, рабочие выгрузки)
 settings.xml

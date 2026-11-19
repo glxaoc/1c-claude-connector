@@ -10,9 +10,9 @@
 /docs/
 /.claude/
 /REVIEW.md
-/.env
-/.env.*
-/settings.xml
-/*.bak-1c
+.env
+.env.*
+settings.xml
+*.bak-1c
 /work/
 /codex/
