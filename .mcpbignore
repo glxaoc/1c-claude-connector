@@ -16,3 +16,6 @@ settings.xml
 *.bak-1c
 /work/
 /codex/
+# dev-зависимости тестов (tests/props.mjs): в пакет не кладём
+/node_modules/fast-check/
+/node_modules/pure-rand/

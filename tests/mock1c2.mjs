@@ -1,4 +1,7 @@
 import http from "node:http";
+import fs from "node:fs";
+// REQLOG: файл, куда пишется каждый запрос (метод, адрес, авторизация); нужен tests/differential.mjs
+const REQLOG = process.env.REQLOG;
 const AUTH = "Basic " + Buffer.from("odata.user:p@ss word","utf8").toString("base64");
 const BASE = "/УТ11/odata/standard.odata";
 const names = [];
@@ -13,6 +16,7 @@ let metaHits = 0;
 const big = Array.from({length:500},(_, i)=>({Ref_Key:`g${i}`,Number:`00-${i}`,Date:"2026-09-01T10:00:00","Контрагент@navigationLinkUrl":`Document_X(guid'g${i}')/Контрагент`,Комментарий:"x".repeat(800)}));
 const send=(res,code,body,type="application/json;charset=utf-8")=>{res.writeHead(code,{"content-type":type});res.end(body);};
 http.createServer((req,res)=>{
+  if (REQLOG) fs.appendFileSync(REQLOG, `${req.method} ${req.url} ${req.headers.authorization||"-"}\n`);
   if (req.method!=="GET") return send(res,405,"only GET","text/plain");
   const u = new URL(req.url,"http://x");
   let p = decodeURIComponent(u.pathname);
@@ -49,4 +53,4 @@ http.createServer((req,res)=>{
   if (p.startsWith("AccumulationRegister_ТоварыНаСкладах/Balance(")) return send(res,200,JSON.stringify({value:[{Номенклатура_Key:"1",ВНаличииBalance:12,"_p":p}]}));
   if (p==="AccumulationRegister_ТоварыНаСкладах/Balance()") return send(res,200,JSON.stringify({value:[{Номенклатура_Key:"1",ВНаличииBalance:12}]}));
   return send(res,404,JSON.stringify({"odata.error":{message:{value:`Не найден объект ${p}`}}}));
-}).listen(8766,"127.0.0.1",()=>console.error("mock2 up"));
+}).listen(Number(process.env.PORT||8766),"127.0.0.1",()=>console.error("mock2 up"));
