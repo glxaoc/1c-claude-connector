@@ -208,6 +208,8 @@ const leaks = [PASSWORD, b64, CLIENT_PHONE, CLIENT_NAME, FILTER_SECRET].filter((
 check("журнал сервера (stderr) без пароля, Basic-заголовка, данных клиента и значений фильтра", stderrAll.includes("GET") && leaks.length === 0, "утекло: " + leaks.join(", "));
 check("ответы инструментов без пароля 1С", !allTexts.some((t) => t.includes(PASSWORD) || t.includes(b64)), "пароль в ответе");
 
+// dev-зависимости (тесты, fast-check и подобные) по package-lock: в пакет для пользователей они попадать не должны
+const DEV_PKGS = Object.entries(JSON.parse(fs.readFileSync(path.join(REPO, "package-lock.json"), "utf8")).packages || {}).filter(([k, v]) => k && v.dev).map(([k]) => k + "/");
 // ---------- 7. релизный пакет .mcpb ----------
 function findMcpb() {
   if (process.env.MCPB_CLI && fs.existsSync(process.env.MCPB_CLI)) return process.env.MCPB_CLI;
@@ -250,6 +252,8 @@ if (!MCPB) {
     check("пакет: внутри манифест, сервер, иконка и зависимости", must.every((m) => list.includes(m)), must.filter((m) => !list.includes(m)).join(", "));
     const bad = list.filter((f) => /^(\.env|settings\.xml|work\/|codex\/|HANDOFF\.md|tests\/|dist\/|docs\/|\.claude\/|\.github\/|README\.md|REVIEW\.md|package-lock\.json|.*\.bak-1c$)/.test(f));
     check("пакет: без тестов, скилла проверки, документации и локальных секретов", bad.length === 0, bad.slice(0, 10).join(", "));
+    const devIn = list.filter((f) => DEV_PKGS.some((d) => f.startsWith(d)));
+    check(`пакет: без dev-зависимостей (${DEV_PKGS.length} по package-lock)`, DEV_PKGS.length > 0 && devIn.length === 0, devIn.slice(0, 5).join(", ") || "в package-lock нет dev-пакетов, проверка ничего не проверяет");
     check("пакет: нативные модули ssh2 вычищены (кроссплатформенность)", !list.some((f) => /^node_modules\/(cpu-features|nan)\/|ssh2\/lib\/protocol\/crypto\/build\//.test(f)), "нативные сборки внутри");
     // запуск из распакованного пакета, как у пользователя после установки
     await withServer(path.join(unpacked, "server", "index.js"), {}, async (c) => {

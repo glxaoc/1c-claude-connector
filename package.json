@@ -3,7 +3,9 @@
   "version": "1.6.0",
   "description": "1С-коннектор для Claude Desktop (MCPB): OData, только чтение, SSH-туннель",
   "scripts": {
-    "test": "node tests/run-tests.mjs",
+    "test": "node tests/run-tests.mjs && node tests/props.mjs && node tests/differential.mjs",
+    "test:props": "node tests/props.mjs",
+    "test:diff": "node tests/differential.mjs",
     "clean-native": "node -e \"for (const d of ['node_modules/cpu-features','node_modules/nan','node_modules/ssh2/lib/protocol/crypto/build']) require('fs').rmSync(d,{recursive:true,force:true})\"",
     "pack": "npm run clean-native && npx -y @anthropic-ai/mcpb validate manifest.json && npx -y @anthropic-ai/mcpb pack . dist/1c-connector.mcpb"
   },
@@ -16,5 +18,8 @@
     "zod": "^4.6.5"
   },
   "type": "module",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "fast-check": "^4.11.0"
+  }
 }
